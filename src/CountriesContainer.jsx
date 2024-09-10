@@ -1,19 +1,14 @@
-
 import dataFile from '../public/all.json'
 import CountryCard from './CountryCard';
-const CountriesContainer = () => {
-const array = dataFile.map((country,idx)=>{
-    console.log(country)
-     return <CountryCard key={idx} name={country?.name?.common} flag={country?.flags?.png} 
-     population={country?.population} region={country?.region} capital={country?.capital}></CountryCard>
-})
-
+const CountriesContainer = ({query}) => {
     return (
         <div> 
-    
             <div className="countries-container">
              {
-                array
+                dataFile.filter((country)=>(country?.name?.common.toLowerCase().includes(query))).map((country,idx)=>{
+                    return <CountryCard key={idx} name={country?.name?.common} flag={country?.flags?.png} 
+                    population={country?.population} region={country?.region} capital={country?.capital}></CountryCard>
+               })
              }
             </div>
         </div>
