@@ -7,8 +7,7 @@ const array = dataFile.map((country,idx)=>{
      return <CountryCard key={idx} name={country?.name?.common} flag={country?.flags?.png} 
      population={country?.population} region={country?.region} capital={country?.capital}></CountryCard>
 })
-   
-// console.log(dataFile)
+
     return (
         <div> 
     
