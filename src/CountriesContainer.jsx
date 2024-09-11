@@ -11,6 +11,7 @@ const CountriesContainer = ({query}) => {
      console.log(countriesData)
     })
  },[])
+ console.log(countriesData)
     return (
         <div> 
             <div className="countries-container">

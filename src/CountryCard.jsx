@@ -1,7 +1,9 @@
 
+
 export default function CountryCard({ name, flag, population, region, capital }) {
+ 
   return (
-    <a className="country-card" href=''>
+    <a className="country-card" href={`/countrydetail?name=${name}`}>
       <img src={flag} alt={name + ' Flag'} />
       <div className="card-text">
         <h3 className="card-title">
