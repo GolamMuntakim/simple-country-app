@@ -1,13 +1,13 @@
-
 import { useEffect, useState } from "react"
 import  './Country.css'
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 const CountryDetails = () => {
     const params = useParams()
     const countryName = params.countrydetail
     console.log(countryName)
     const [countryData, setCountryData] = useState(null)
     const [notFound, setNotFound] = useState(false)
+    console.log(countryData?.borders)
     useEffect(()=>{
       fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
       .then((res)=>res.json())
@@ -23,11 +23,23 @@ const CountryDetails = () => {
           tld: data.tld,
           languages : Object.values(data.languages).join(', '),
           currencies : Object.values(data.currencies).map((currency) => currency.name).join(', '),
-        }).catch((err)=>  {
-            setNotFound(true)
+          borders : [""]
         })
-      })
-    },[])
+        if(!data.borders){
+            data.borders = []
+        }
+        Promise.all(data.borders.map((border)=>{
+           return  fetch(`https://restcountries.com/v3.1/alpha/${border}`)
+            .then((res)=>res.json())
+            .then(([borderCountry])=> borderCountry.name.common)
+        })).then((borders)=>{
+            setCountryData((prevState) => ({...prevState, borders}))
+            console.log(borders)
+        })
+      }).catch((err)=>  {
+        setNotFound(true)
+    })
+    },[countryName])
     if(notFound){
         return <div>Country Not Found</div>
     }
@@ -97,9 +109,14 @@ const CountryDetails = () => {
               <span className="languages"></span>
             </p>
           </div>
-          <div className="border-countries">
+         {
+            countryData.borders.length !== 0 &&  <div className="border-countries">
             <b>Border Countries: </b>&nbsp;
+            {
+                countryData.borders.map((border)=>(<Link key={border} to={`/${border}`}>{border}</Link>))
+            }
           </div>
+         }
         </div>
       </div>
     </div>
