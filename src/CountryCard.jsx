@@ -1,6 +1,4 @@
 
-import React from 'react'
-
 export default function CountryCard({ name, flag, population, region, capital }) {
   return (
     <a className="country-card" href=''>
