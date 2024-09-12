@@ -33,7 +33,6 @@ const CountryDetails = () => {
       })).then((borders)=>{
           setTimeout(()=>{
             setCountryData((prevState) => ({...prevState, borders}))
-          console.log(borders)
           })
       }) 
     }
