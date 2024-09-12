@@ -1,6 +1,7 @@
 // import dataFile from '../public/all.json'
 import { useEffect, useState } from 'react';
 import CountryCard from './CountryCard';
+import CountriesListShimmer from './CountriesListShimmer';
 const CountriesContainer = ({query}) => {
     const [countriesData, setCountriesData] = useState([])
  useEffect(()=>{
@@ -14,14 +15,17 @@ const CountriesContainer = ({query}) => {
  console.log(countriesData)
     return (
         <div> 
-            <div className="countries-container">
-             {
-                countriesData.filter((country)=>(country?.name?.common.toLowerCase().includes(query))).map((country,idx)=>{
-                    return <CountryCard key={idx} name={country?.name?.common} flag={country?.flags?.png} 
-                    population={country?.population} region={country?.region} capital={country?.capital}></CountryCard>
-               })
-             }
-            </div>
+           
+        {!countriesData.length ?  (<CountriesListShimmer></CountriesListShimmer>):
+           ( <div className="countries-container">
+            {
+            countriesData.filter((country)=>(country?.name?.common.toLowerCase().includes(query))).map((country,idx)=>{
+                return <CountryCard key={idx} name={country?.name?.common} flag={country?.flags?.png} 
+                population={country?.population} region={country?.region} capital={country?.capital}></CountryCard>
+            })
+            }
+        </div>)
+        }
         </div>
     );
 };
