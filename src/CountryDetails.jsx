@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import  './Country.css'
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useOutletContext, useParams } from "react-router-dom";
 const CountryDetails = () => {
     const params = useParams()
     const countryName = params.countrydetail
     const {state} = useLocation()
-    console.log(state)
+    const [isDark] = useOutletContext()
     const [countryData, setCountryData] = useState(null)
     const [notFound, setNotFound] = useState(false)
     // console.log(countryData?.borders)
@@ -55,12 +55,12 @@ const CountryDetails = () => {
     if(notFound){
         return <div>Country Not Found</div>
     }
-    console.log(notFound)
+   
     return ( 
         countryData === null ? 'loading...' : (
             <div>
-            <main>
-    <div className="country-details-container">
+            <main className={`${isDark ? 'dark' : '' }`}>
+    <div className="country-details-container " >
       <span className="back-button" onClick={()=> history.back()}>
         <i className="fa-solid fa-arrow-left"></i>&nbsp; Back
       </span>

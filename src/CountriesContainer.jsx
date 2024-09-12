@@ -9,10 +9,10 @@ const CountriesContainer = ({query}) => {
     .then((res)=>res.json())
     .then((data)=>{
      setCountriesData(data)
-     console.log(countriesData)
+
     })
  },[])
- console.log(countriesData)
+
     return (
         <div> 
            
