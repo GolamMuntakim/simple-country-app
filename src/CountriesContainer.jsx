@@ -21,7 +21,8 @@ const CountriesContainer = ({query}) => {
             {
             countriesData.filter((country)=>(country?.name?.common.toLowerCase().includes(query))).map((country,idx)=>{
                 return <CountryCard key={idx} name={country?.name?.common} flag={country?.flags?.png} 
-                population={country?.population} region={country?.region} capital={country?.capital}></CountryCard>
+                population={country?.population} region={country?.region} capital={country?.capital} 
+                data={country}></CountryCard>
             })
             }
         </div>)
