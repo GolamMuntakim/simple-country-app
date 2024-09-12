@@ -1,7 +1,10 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { ThemeContext } from "./Context/ThemeContaxt"
+
 
 export default function Header({theme}) {
-  const [isDark, setIsDark] = theme
+  const [isDark, setIsDark] = useContext(ThemeContext)
+  
   
   return (
     <header className={`header-container ${isDark ? 'dark' : ''}`}>
