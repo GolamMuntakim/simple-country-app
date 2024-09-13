@@ -19,7 +19,8 @@ const CountriesContainer = ({query}) => {
         {!countriesData.length ?  (<CountriesListShimmer></CountriesListShimmer>):
            ( <div className="countries-container">
             {
-            countriesData.filter((country)=>(country?.name?.common.toLowerCase().includes(query))).map((country,idx)=>{
+            countriesData.filter((country)=>(country?.name?.common.toLowerCase().includes(query)  ||  country?.region.toLowerCase().includes(query)
+        )).map((country,idx)=>{
                 return <CountryCard key={idx} name={country?.name?.common} flag={country?.flags?.png} 
                 population={country?.population} region={country?.region} capital={country?.capital} 
                 data={country}></CountryCard>

@@ -15,7 +15,7 @@ const Home = () => {
 
       <div className="search-filter-container">
         <SearchBar setQuery={setQuery}></SearchBar>
-        <SelectMenue></SelectMenue>
+        <SelectMenue setQuery={setQuery}></SelectMenue>
       </div>
       {query === 'unmount' ? '' : <CountriesContainer query={query}></CountriesContainer>}
     </main>
